@@ -18,7 +18,7 @@ date: 2023-12-31 13:30
             - Spread：初始方向范围
         - Display
             - Scale:godot在此设置的最大最小范围**随机缩放粒子**
-            - [Animation](./38.Bug.md#section38)
+            - [Animation]()
                 - Offset Min:最小帧.0是第一帧，1是最后一帧
                 - Offset Max:最大帧.
         - Accelerations

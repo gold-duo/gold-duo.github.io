@@ -11,7 +11,7 @@ date: 2024-01-07 19:30
 ## drone特点
 - 1.Player进入drone区域，drone朝玩家[加速移动](#section39_01)
 - 2.drone与[任何物体碰撞则爆炸](#section39_02)
-- 3.drone被击中产生爆炸效果([AnimationPlayer](./19.Animation.md#section19.3))和闪烁效果(shader，[之前一样的shander代码](./37.Shader.md))
+- 3.drone被击中产生爆炸效果([AnimationPlayer]()
 - 4.drone爆炸附近范围的物体(Container、Entity组)也[被殃及(触发爆炸)](#section39_03)
 
 ## 一些细节
