@@ -8,11 +8,11 @@ date: 2024-01-11 23:30
 创建一个hunter场景
 
 ## hunter：
-    - 功能：hunter一只蜘蛛（为什么叫hunter呢）。基本的功能和Bug差不多
-        - 1.player进入边界hunter用寻路算法爬(骨骼动画)向player
-        - 2.player进入到它的攻击区域开咬，被咬后health-20
-        - 3.hunter被攻击 health-10,health<=0销毁,hunter也是被限制不能被连续攻击的(hit)
-    - 知识点：这节包括两个概念:Pathfinding(路)、Bone animations(骨骼动画)
+- 功能：hunter一只蜘蛛（为什么叫hunter呢）。基本的功能和Bug差不多
+    - 1.player进入边界hunter用寻路算法爬(骨骼动画)向player
+    - 2.player进入到它的攻击区域开咬，被咬后health-20
+    - 3.hunter被攻击 health-10,health<=0销毁,hunter也是被限制不能被连续攻击的(hit)
+- 知识点：这节包括两个概念:Pathfinding(路)、Bone animations(骨骼动画)
 
 ## Pathfinding:
 - NavigationRegion2D:绘制路径区域

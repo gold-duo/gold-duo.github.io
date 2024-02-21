@@ -14,6 +14,7 @@ date: 2024-01-12 09:00
 - Playing：播放
 - Autoplay:自动播放
 - Loop:循环播放。左侧面板`Scene`旁边的`Import`-> Loop点选-> Reimport(右侧AudioStreamPlayer2d-> Stream展开->loop将同步选中状态)
+
 ## 代码里动态创建
 ```python
 var player=AduioStreamPlayer2D.new()
@@ -30,6 +31,7 @@ player.play()
 - 添加一个scene
 - 将这个场景增加到`AutoLoad`
 - 设置 Autoplay=true
+
 ## 给鼠标添加图标：Project -> Project Setting -> General ->Display->Mouse Cursor -> Custom Image
 - Custom Image Hotspot：设置鼠标图热点(实际触发的点击点)。如果一张图时正方体，默认x&y=0,这时这个点在正方体的左上角，故要设置中心点若图片是32*32,那么x&y=16
 

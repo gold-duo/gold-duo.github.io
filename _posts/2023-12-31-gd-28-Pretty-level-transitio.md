@@ -5,7 +5,9 @@ tags: [godot,The ultimate introduction to Godot 4]
 date: 2023-12-31 13:30
 ---
 
-## 平滑关卡过渡.用Autoload]()结合[AnimationPlayer制造一个颜色渐变的scene，转关卡时颜色先由透明到黑,加载目标scene再由黑到透明。创建步骤
+平滑关卡过渡.用Autoload]()结合[AnimationPlayer制造一个颜色渐变的scene，转关卡时颜色先由透明到黑,加载目标scene再由黑到透明。
+
+## 创建步骤
 - 新建一个scene(TransitionLayer),并添加到`Autoload`
 - 添加两个节点:`ColorRect`(color=000000[全黑])、`AnimationPlayer`
 - 添加轨道(fade_to_black):将`ColorRect.modulate`从透明调到全黑
