@@ -5,7 +5,7 @@ tags: [godot,The ultimate introduction to Godot 4]
 date: 2023-12-31 13:30
 ---
 
-在 [29节]() 的基础上，射击某个物品（比如宝箱[crate]、厕所[toilet]）时创建 items 撒点钞票或者补血
+在 29节 的基础上，射击某个物品（比如宝箱[crate]、厕所[toilet]）时创建 items 撒点钞票或者补血
 
 ## [Groups](https://docs.godotengine.org/zh-cn/4.x/tutorials/scripting/groups.html)：Godot 与其他软件中的标签类似。可以将节点加入任意数量的你想要的分组之中(用来组织大型场景、对代码解耦)。
 ### Groups的作用：你可以使用 SceneTree 来
