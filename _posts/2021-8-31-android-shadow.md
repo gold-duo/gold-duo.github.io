@@ -57,5 +57,5 @@ graph TD
     D2-->D3
     D4-->E1[BinderPluginLoader.loadPlugin]
 ```
-![](/img/android/shadow01.png)
+![]({{site.url}}/img/android/shadow01.png)
 

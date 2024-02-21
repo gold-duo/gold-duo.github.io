@@ -352,5 +352,5 @@ let slice = &a[1..3];
 
 ## 脑图
 
-![](/img/rust/04.ownship.png)
+![]({{site.url}}/img/rust/04.ownship.png)
 
