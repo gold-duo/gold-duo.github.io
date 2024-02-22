@@ -15,14 +15,16 @@ date: 2024-01-07 19:30
 - 4.drone爆炸附近范围的物体(Container、Entity组)也[被殃及(触发爆炸)](#section39_03)
 
 ## 一些细节
-- <a id="section39_01">向player加速移动</a>
+- 向player加速移动
 
 ```python
 #在player进入边界，用补间动画，在短时间内将 speed 属性从0调整到600
 var tween = create_tween()
 tween.tween_property(self, "speed",max_speed, 6)
 ```
-- <a id="section39_02">判断是否与其他物体碰撞：`move_and_collide( velocity*delta )`</a>返回一个 KinematicCollision2D，其中包含有关停止时或沿运动触摸另一个实体时碰撞的信息。
+- 判断是否与其他物体碰撞：
+
+`move_and_collide( velocity*delta )`返回一个 KinematicCollision2D，其中包含有关停止时或沿运动触摸另一个实体时碰撞的信息。
 
 - drone爆炸后，drone的爆炸效果仍然跟随玩家问题
 
@@ -36,7 +38,7 @@ func _process(delta):
         #.....
 ```
 
-- <a id="section39_03">爆炸殃及池鱼</a>。这个实现基本和`grenade`差不多
+- 爆炸殃及池鱼。这个实现基本和`grenade`差不多
 
 ```python
 if explosion_active:

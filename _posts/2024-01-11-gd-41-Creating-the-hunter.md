@@ -44,7 +44,7 @@ date: 2024-01-11 23:30
 ### 一条腿的制作步骤
 - 1.添加一个`Skeleton2D`节点，添加子节点躯干(Torso)Bone2D来链接腿，这个Bone下放上躯干Sprite2D
 - 2.在`Torso Bone`下添加子节点前右腿Bone2D(FrontRightLeg),这个节点下放上前右腿Sprite2D
-    - ①<a id="section_41_01">设置Bone2D的`Auto Calculate Length and Angle`，调整`Length`和`Angle`链接`leg`两点</a>
+    - ①设置Bone2D的`Auto Calculate Length and Angle`，调整`Length`和`Angle`链接`leg`两点
 - 3.在`FrontRightLeg`下添加子节点钳子Bone2D(FrontRightClaw)，这个节点放上Claw Sprite2D
     - ①参考[2.①](#section_41_01)
 - 4.在`FrontRightLeg`的尾端添加Marker2D节点`FrontRight`
