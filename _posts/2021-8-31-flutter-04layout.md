@@ -6,7 +6,7 @@ tags: [flutter,Flutter Learning]
 ---
 
 ## 一.[基础类和继承结构](https://book.flutterchina.club/chapter4/intro.html)
-- 1.基础类
+### 1.基础类
 
 Widget|对应的Element| 用途 
 ---|---|---
@@ -14,9 +14,9 @@ LeafRenderObjectWidget        | LeafRenderObjectElement        | Widget树的叶
 SingleChildRenderObjectWidget | SingleChildRenderObjectElement | 包含一个子Widget，如：ConstrainedBox、DecoratedBox等
 MultiChildRenderObjectWidget  | MultiChildRenderObjectElement  | 包含多个子Widget，一般都有一个children参数，接受一个Widget数组。如Row、Column、Stack等
 
-- 2.继承结构
+### 2.继承结构
 
-```
+```mermaid
 graph TD
     Widget-->A[RenderObjectWidget]
     A-->|LeafRenderObjectElement|C[LeafRenderObjectWidget]
@@ -26,9 +26,11 @@ graph TD
     D-->D1[ConstrainedBox/DecoratedBox]
     E-->E1[Row/Column/Stack]
 ```
+![]({{site.url}}/img/flutter/0401layout.png)
 
 ## 二.[Row、Column](https://book.flutterchina.club/chapter4/row_and_column.html)(线性布局)
-- 1.公共属性
+
+公共属性:
 
 属性 | 作用 | 其他
 ---|---|---
@@ -39,17 +41,19 @@ mainAxisAlignment|子组件在Row/Column所占用的**水平**/**垂直**空间�
 crossAxisAlignment|子组件在Row/Column所占用的**垂直**/**水平**空间内对齐方式|**verticalDirection是crossAxisAlignment的参考系**<br/>start：verticalDirection=down顶部/左边对齐,verticalDirection=up底部/右边对齐<br/>end：和start相反
  
 
-### 三.[Flex](https://book.flutterchina.club/chapter4/flex.html)
+## 三.[Flex](https://book.flutterchina.club/chapter4/flex.html)
+
 - Row(direction: Axis.horizontal)、Column(direction: Axis.vertical)是Flex子类.顾除了direction Flex具有Row、Column的所有属性
 - 只有**和Expanded（Space）组件配合**才能实现Flex布局
 - Expanded
     - 1.flex属性：子组件所占用的空间（0或null，则child不会被扩伸占用的空间）
 
 ## 四.[Wrap、Flow](https://book.flutterchina.club/chapter4/wrap_and_flow.html)(流式布局)
+
 - 为什么需要Wrap、Flow？
 > Row、Column的子widget超出屏幕范围flutter默认不能自适应换行，而是报溢出错误。
 
-- 1.Wrap
+### 1.Wrap
 
 属性 | 作用 | 其他
 ---|---|---
@@ -58,20 +62,23 @@ runSpacing|纵轴方向的间距|
 runAlignment|纵轴方向的对齐方式|
 direction、crossAxisAlignment、textDirection、verticalDirection|参照Row、Column属性|
 
-- 2.FLow ：Flow提供了dalegate（FlowDelegate）的方式对子Widget的位置进行定位处理。主要用于一些需要自定义布局策略或性能要求较高(如动画中)的场景
-    - FlowDelegate Flow.delegate必须提供FlowDelegate抽象类子类的实例。
-    
-    函数 | 作用
-    ---|---
-    void paintChildren(FlowPaintingContext context) | 此方法中调用context.paintChild 进行重绘，而context.paintChild在重绘时使用了转换矩阵，并没有实际调整组件位置。
-    Size getSize(BoxConstraints constraints) | 指定Flow大小
-    bool shouldRepaint(covariant FlowDelegate oldDelegate)| 是否要重绘
-    BoxConstraints getConstraintsForChild(int i, BoxConstraints constraints)|重写控制每个子widget的constraints
+### 2.FLow 
+
+Flow提供了dalegate（FlowDelegate）的方式对子Widget的位置进行定位处理。主要用于一些需要自定义布局策略或性能要求较高(如动画中)的场景
+- FlowDelegate Flow.delegate必须提供FlowDelegate抽象类子类的实例。
+
+函数 | 作用
+---|---
+void paintChildren(FlowPaintingContext context) | 此方法中调用context.paintChild 进行重绘，而context.paintChild在重绘时使用了转换矩阵，并没有实际调整组件位置。
+Size getSize(BoxConstraints constraints) | 指定Flow大小
+bool shouldRepaint(covariant FlowDelegate oldDelegate)| 是否要重绘
+BoxConstraints getConstraintsForChild(int i, BoxConstraints constraints)|重写控制每个子widget的constraints
 
 ## 五.[Stack、Positioned](https://book.flutterchina.club/chapter4/stack.html)(层叠布局)
 - 单独Stack效果和android FrameLayout相同
 - 配合Positioned实现绝对布局
-- 1.Stack
+
+### 1.Stack
 
 属性 | 作用 | 其他
 ---|---|---
@@ -80,23 +87,27 @@ fit|用于确定**没有定位**的子组件如何去适应Stack的大小|StackF
 overflow|如何显示超出Stack显示空间的子组件|Overflow.clip：超出部分会被剪裁（隐藏）<br/>visible 时则不会
 textDirection|参考Row、Column|-
 
-- 2.Positioned(相当于android的AbsoluteLayout)
-    - left、top 、right、 bottom分别代表离Stack左、上、右、底四边的距离
-    - width和height用于指定需要定位元素的宽度和高度.left、width、right中width、right只能存在一个否则报错，同理top、height、bottom也是。
+### 2.Positioned(相当于android的AbsoluteLayout)
+- left、top 、right、 bottom分别代表离Stack左、上、右、底四边的距离
+- width和height用于指定需要定位元素的宽度和高度.left、width、right中width、right只能存在一个否则报错，同理top、height、bottom也是。
 
 
 ## 六.[Align(相对定位)、Center](https://book.flutterchina.club/chapter4/alignment.html)
-- 1.Align:A用于调整子组件的位置，并可根据子组件的宽高确定自身的的宽高
-    - 主要属性
-    
-    属性 | 作用 | 其他
-    ---|---|---
-    alignment|子组件在父组件中的起始位置|使用Alignment定义的常量
-    widthFactor|缩放因子，确定Align 组件本身宽度|eg：子widget宽60，则Align的宽=widthFactor*widget
-    heightFactor|缩放因子，确定Align 组件本身高度|-
+### 1.Align
 
-    - Alignment
-    - FractionalOffset
+A用于调整子组件的位置，并可根据子组件的宽高确定自身的的宽高
+- 主要属性
 
-- 2.Center：Align的子类并将alignment设置为Alignment.center
+属性 | 作用 | 其他
+---|---|---
+alignment|子组件在父组件中的起始位置|使用Alignment定义的常量
+widthFactor|缩放因子，确定Align 组件本身宽度|eg：子widget宽60，则Align的宽=widthFactor*widget
+heightFactor|缩放因子，确定Align 组件本身高度|-
+
+- Alignment
+- FractionalOffset
+
+### 2.Center
+
+Align的子类并将alignment设置为Alignment.center
 

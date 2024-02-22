@@ -7,19 +7,20 @@ tags: [python,网络爬虫开发实战,Elasticsearch,spider]
 
 ElasticSearch (p159)是一个分布式的，高性能，高可用的，可伸缩的搜索和分析系统
 
+## ElasticSearch特点
 - (1)可以作为大型分布式集群(数百台服务器)技术，处理 PB 级的数据，服务大公司；也可以运行在单机上服务于小公司
 - (2)Elasticsearch 不是什么新技术，主要是将全文检索、数据分析以及分布式技术，合并在了一起，才形成了独一无二的 ES：lucene (全文检索)，商用的数据分析软件，分布式数据库
 - (3)对用户而言，是开箱即用的，非常简单，作为中小型应用，直接 3 分钟部署一下 ES，就可以作为生产环境的系统来使用了，此时的场景是数据量不大，操作不是太复杂
 - (4)数据库的功能面对很多领域是不够用的(事务，还有各种联机事务型的操作)；特殊的功能，比如全文检索，同义词处理，相关度排名，复杂数据分析，海量数据的近实时处理，Elasticsearch 作为传统数据库的一个补充，提供了数据库所不能提供的很多功能。
 
 ## 安装：
-    - 直接 [下载](https://www.elastic.co/cn/downloads/elasticsearch)压缩包解压，运行 `bin/elasticsearch`启动。浏览器打开`http://localhost:9200/`验证是否正常（显示json信息）
+- 直接 [下载](https://www.elastic.co/cn/downloads/elasticsearch)压缩包解压，运行 `bin/elasticsearch`启动。浏览器打开`http://localhost:9200/`验证是否正常（显示json信息）
 
-    ```python
-    #运行浏览器控制台出现"received plaintext http traffic on an https channel, closing connection Netty4HttpChannel{localAddress=/[0:0:0:0:0:0:0:1]:9200"
-    # 打开 config/elasticsearch.yml 关闭SSL认证,将 xpack.security.enabled 设置成 false
-    ```
-    - 安装pyton库:`pip3 install elasticsearch`
+```python
+#运行浏览器控制台出现"received plaintext http traffic on an https channel, closing connection Netty4HttpChannel{localAddress=/[0:0:0:0:0:0:0:1]:9200"
+# 打开 config/elasticsearch.yml 关闭SSL认证,将 xpack.security.enabled 设置成 false
+```
+- 安装pyton库:`pip3 install elasticsearch`
 
 ## Elasticssearch的概念
 
@@ -33,7 +34,7 @@ ElasticSearch (p159)是一个分布式的，高性能，高可用的，可伸缩
 字段(field)|多个字段组成一个文档(类似MySQL中的字段)
 
 
-> 用关系型数据库的类比Elasticssearch:
+### 用关系型数据库的类比Elasticssearch:
 
 关系型数据库| DB|表(Tables)|行(Rows)|列(Columns)
  ---|---|---|---|---

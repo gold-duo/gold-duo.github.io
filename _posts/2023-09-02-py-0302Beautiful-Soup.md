@@ -7,10 +7,14 @@ tags: [python,网络爬虫开发实战,Beautiful Soup,XML,XML解析库]
 
 Beautiful Soup是一个HTML/XML解析库，提供简单的、Python式的函数来处理导航、搜索、修改分析树等功能。
 
-## 安装:`pip3 install beautifulsoup4`
+## 安装:
+
+`pip3 install beautifulsoup4`
+
 ### vcode  `No module named 'bs4'` 问题：
 - 1.`commond+shift+p`(windows`ctrl+shift+P`)
 - 2.Python Interpreter -> Python 3.12.0
+
 ### 代码验证安装
 
 ```python
@@ -20,8 +24,8 @@ print(soup.p.string)
 ```
 
 ## 使用（p101）
-### 选择器操作集合
 
+### 简单的例子
 ```python
 html = """<html>
   <head>
@@ -42,6 +46,8 @@ html = """<html>
 from bs4 import BeautifulSoup
 soup = BeautifulSoup(html, 'lxml')
 ```
+
+### 选择器操作集合
 
 操作|描述|实例
 ---|---|---

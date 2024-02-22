@@ -18,7 +18,7 @@ textScaleFactor|对于当前字体大小的缩放因子|相对于style属性的f
 style|用于指定文本显示的样式如颜色、字体、粗细、背景等|见下表TextStyle
 
 
-**TextStyle**
+### **TextStyle**
 属性|作用|其他
 ---|---|---
 color|字体颜色|
@@ -38,7 +38,7 @@ const TextSpan({
 });
 ```
 
-**example**
+### example
 ```dart
 Text.rich(TextSpan(//Text其实就是RichText的一个包装，而RichText是可以显示多种样式(富文本)的widget。
     children: [
@@ -81,37 +81,39 @@ DefaultTextStyle(
 );
 ```
 
-## 4.字体。使用字体分两步
-  - a.在asset中声明。先在pubspec.yaml中声明，然后将字体文件复制到在pubspec.yaml中指定的位置。
+## 4.字体
 
-  ```dart
-  flutter:
-    fonts:
-      - family: Raleway
-        fonts:
-          - asset: assets/fonts/Raleway-Regular.ttf
-          - asset: assets/fonts/Raleway-Medium.ttf
-            weight: 500
-  ```
-  - b.通过TextStyle属性使用字体
-  
-  ```dart
-  // 声明文本样式
-  const textStyle = const TextStyle(
-    fontFamily: 'Raleway',
-  );
+使用字体分两步
+### 1.在asset中声明。先在pubspec.yaml中声明，然后将字体文件复制到在pubspec.yaml中指定的位置。
 
-  // 使用文本样式
-  var buttonText = const Text(
-    "Use the font for this text",
-    style: textStyle,
-  );
-  ```
-  **使用Package中的字体**
+```dart
+flutter:
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway-Regular.ttf
+        - asset: assets/fonts/Raleway-Medium.ttf
+          weight: 500
+```
+### 2.通过TextStyle属性使用字体
 
-  ```dart
-  const textStyle = const TextStyle(
-    fontFamily: 'Raleway',
+```dart
+// 声明文本样式
+const textStyle = const TextStyle(
+  fontFamily: 'Raleway',
+);
+
+// 使用文本样式
+var buttonText = const Text(
+  "Use the font for this text",
+  style: textStyle,
+);
+```
+**使用Package中的字体**
+
+```dart
+const textStyle = const TextStyle(
+  fontFamily: 'Raleway',
     package: 'my_package', //指定包名
   );
   ```
