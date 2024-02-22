@@ -1,7 +1,7 @@
 ---
 title: 24courses in stock
 date: 2021-08-31 23:24
-categories: [finance, 金融市场技术分析]
+categories: [finance]
 tags: [金融市场技术分析] 
 ---
 
