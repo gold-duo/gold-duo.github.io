@@ -5,7 +5,7 @@ categories: [python,网络爬虫开发实战]
 tags: [python,网络爬虫开发实战,机验证码,验证码] 
 ---
 
-在android手机设备里用[SmsForwarder](https://github.com/pppscn/SmsForwarder)将接受到的短信，按照一定的规则转送一个web接口。
+在android手机设备里用[SmsForwarder](https://github.com/pppscn/SmsForwarder)将接受到的短信，按照一定的规则转发到一个web接口。
 
 ## 发送规则
 
@@ -13,7 +13,7 @@ tags: [python,网络爬虫开发实战,机验证码,验证码]
 
 ## web接口
 
-这个例子自己要做的也就是写个web服务。作者用Flash框架写了一个简单的将短信内容接收的web服务
+这个例子自己要做的也就是写个web服务。作者用Flask框架写了一个简单的将短信内容接收的web服务
 
 ```python
 from flask 
@@ -39,7 +39,7 @@ if __name__=='__main__':
 - 安装.这个东西得安装，还得注册设置自己的二级域名
 - 工具命令
 
-上面搞好了用命令:`ngrok http 5000`暴露 flak的服务端口
+上面搞好了用命令:`ngrok http 5000`暴露 Flask的服务端口
 
 ## 批量接受短信验证的几种方式
 - 1.机海战术
