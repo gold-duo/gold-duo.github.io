@@ -34,7 +34,7 @@ fn('abc',888);//类型不一样
 fn(1,'a',22);//多了参数
 ```
 
-上面的代码这么写是没问题的，不过在运行时dart将会抛出`noSuchMethod`异常。也就是说当函数赋值给`Function`对象后，类型检查就交给了dart vm在执行，而不是在编译阶段。从这点来说dart又具备了一定的动态性了。
+上面的代码这么写是没问题的，不过在运行时dart将会抛出`noSuchMethod`异常。也就是说当函数赋值给`Function`对象后，类型检查就交给了dart vm，而不是在编译阶段。从这点来说dart又具备了一定的动态性了。
 
 ### dart函数调用的动态性
 
@@ -58,10 +58,10 @@ String fun2(int a1, int a2,{required String desc, String? other}) =>
 将`fun2`赋值给`Function`对象的`fn`变量`Function fn=fun2;`,现在用`fn`变量调用函数可以是这样的:
 
 ```dart
-int ret=Function.apply(fn
+var ret=Function.apply(fn
   [666,888], 
   { #desc:'call from function.apply',
-    #other:'other value'}) as int;
+    #other:'other value'}) as String;
 ```
 
 ## 优雅的函数isolate化
@@ -187,7 +187,7 @@ final ret=await fun2.isolate(666,
 
 #### 用可调用对象获取类型信息
 
-遗憾的是先阶段凭借dart语法和提供的`Function`功能，我们并不能在编译时拿到原函数的返回值类型。只能运行期强制转换或者额外添加类型信息，比如`fun2.isolate(..) as T;`、`fun2.isolate<T>(..) as T;`、`T ret=fun2.isolate<T>(..);`。额外添加类型信息总比手动类型转换好点吧？我们就来考虑该如何才能做到。
+遗憾的是现阶段凭借dart语法和提供的`Function`功能，我们并不能在编译时拿到原函数的返回值类型。只能运行期强制转换或者额外添加类型信息，比如`fun2.isolate(..) as T;`、`fun2.isolate<T>(..) as T;`、`T ret=fun2.isolate<T>(..);`。额外添加类型信息总比手动类型转换好点吧？我们就来考虑该如何才能做到。
 
 可调用对象([Callable objects](https://dart.dev/language/callable-objects))并不是什么新鲜的事请,这跟kotlin在class中实现一个invoke函数后类的实例就可以像调用函数一样调用这个invoke函数(rust 的struct也有类似的功能也是`call`函数)，不过dart变成了call函数。
 
@@ -230,4 +230,4 @@ var ret1=await fun2.isolate<String>(666,
 
 ## 总结
 
-至此，讲述了如何实现不带命名参数和带命名的函数实现函数后加个`.isolate`跑在isolate中。不带命名参数的实现还是比较漂亮的，所有的类型信息都完整保留且无论多少个参数都可以用`.isolate`；而带命名参数的实现还略显不足，需要用户制定返回值类型和需要根据位置参数数量在`.isolate`后加上相应的数量。
+至此，讲述了如何实现不带命名参数和带命名的函数实现函数后加个`.isolate`跑在isolate中。不带命名参数的实现还是比较漂亮的，所有的类型信息都完整保留且无论多少个参数都可以用`.isolate`；而带命名参数的实现还略显不足，需要用户指定返回值类型和需要根据位置参数数量在`.isolate`后加上相应的数量。
