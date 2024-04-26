@@ -161,5 +161,5 @@ class LogsContentProvider: ContentProvider() {
 
 ## 四.脑图
 
-![Hilt](/img/android/Hilt.png)
+![Hilt](/assets/android/Hilt.png)
 

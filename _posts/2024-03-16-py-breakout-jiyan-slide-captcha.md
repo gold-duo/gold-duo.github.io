@@ -42,7 +42,7 @@ tags: [python,网络爬虫,滑动验证码,动画插值]
 - 公式：y=x
 - 算法图示
 
-![]({{site.url}}/img/python/breakout-jiyan-slide-captcha01.png)
+![](/assets/python/breakout-jiyan-slide-captcha01.png)
 
 ### 2.DecelerateInterpolator
 
@@ -51,7 +51,7 @@ tags: [python,网络爬虫,滑动验证码,动画插值]
 - 公式：y=(1.0 - (1.0 - x) * (1.0 - x))
 - 算法图示
 
-![]({{site.url}}/img/python/breakout-jiyan-slide-captcha02.png)
+![](/assets/python/breakout-jiyan-slide-captcha02.png)
 
 
 ### 3.AccelerateInterpolator
@@ -61,7 +61,7 @@ tags: [python,网络爬虫,滑动验证码,动画插值]
 - 公式： y=x * x
 - 算法图示
 
-![]({{site.url}}/img/python/breakout-jiyan-slide-captcha03.png)
+![](/assets/python/breakout-jiyan-slide-captcha03.png)
 
 ### 3.AccelerateDecelerateInterpolator
 
@@ -70,7 +70,7 @@ tags: [python,网络爬虫,滑动验证码,动画插值]
 - 公式： y=(cos((x + 1) * PI) / 2.0) + 0.5
 - 算法图示
 
-![]({{site.url}}/img/python/breakout-jiyan-slide-captcha04.png)
+![](/assets/python/breakout-jiyan-slide-captcha04.png)
 
 ## 实现动画插值算法的轨迹序列
 
@@ -103,13 +103,13 @@ class MoveXGenerator:
 ## 成果
 用网络爬虫实践里的练习网址[https://captcha1.scrape.center/](https://captcha1.scrape.center/),试了下效果还是挺好的虽然不能说是100%，但错了只要随机换个插值算法重头再来😄。
 
-![]({{site.url}}/img/python/breakout-jiyan-slide-captcha05.gif)
+![](/assets/python/breakout-jiyan-slide-captcha05.gif)
 
 ## 总结
 
 - 1.动画插值算法用于突破滑动验证码的"行为识别"是可行的
 
-    有很多插值算法当然不一定都适合。
+    有很多插值算法可用（当然不一定都适合）。
 
 - 2.“行为识别”是一种模糊的匹配。
 
@@ -117,4 +117,4 @@ class MoveXGenerator:
 
 - 3.由2就导致市面上各种模拟轨迹算法。
 
-    有些算法复杂通过率并不好，还是换个思路轻松，还有很多动画插值算法可以再试。
+    有些算法复杂通过率并不好，还是换个思路轻松，还有很多动画插值算法可以再试试😄。

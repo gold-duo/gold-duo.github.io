@@ -26,7 +26,7 @@ graph TD
     D-->D1[ConstrainedBox/DecoratedBox]
     E-->E1[Row/Column/Stack]
 ```
-![]({{site.url}}/img/flutter/0401layout.png)
+![](/assets/flutter/0401layout.png)
 
 ## 二.[Row、Column](https://book.flutterchina.club/chapter4/row_and_column.html)(线性布局)
 
