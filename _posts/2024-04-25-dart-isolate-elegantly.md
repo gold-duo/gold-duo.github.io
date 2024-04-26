@@ -2,8 +2,10 @@
 title: dart如何优雅的调用isolate
 date: 2024-04-02 21:00
 categories: [dart]
-tags: [flutter,dart,isolate,async,compute,spawn,sendPort,ReceivePort] 
+tags: [flutter,dart,isolate,async,compute,spawn,sendPort,ReceivePort,isolate_classy] 
 ---
+
+实现的library [isolate_classy](https://pub.dev/packages/isolate_classy)已上传至 pub.dev.
 
 ## dart异步的现状
 
@@ -231,3 +233,5 @@ var ret1=await fun2.isolate<String>(666,
 ## 总结
 
 至此，讲述了如何实现不带命名参数和带命名的函数实现函数后加个`.isolate`跑在isolate中。不带命名参数的实现还是比较漂亮的，所有的类型信息都完整保留且无论多少个参数都可以用`.isolate`；而带命名参数的实现还略显不足，需要用户指定返回值类型和需要根据位置参数数量在`.isolate`后加上相应的数量。
+
+实现library [isolate_classy](https://pub.dev/packages/isolate_classy)已上传至 pub.dev.
