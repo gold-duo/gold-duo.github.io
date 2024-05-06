@@ -38,6 +38,18 @@ width、height|double|宽、高|
 margin|EdgeInsetsGeometry|四周边缘|不占用自身空间
 
 
+### ShapeBorder 汇总
+
+名称|作用|例子|其他
+---|---|---|---
+BeveledRectangleBorder|斜角矩形/菱形/矩形边框|BeveledRectangleBorder(<br/>side: BorderSide(width: 1, color: Colors.green),<br/>borderRadius: BorderRadius.circular(10))|菱形:设置半径大于控件<br/>矩形:半径=0
+CircleBorder|圆形|CircleBorder(side: BorderSide(color: Colors.green))||
+ContinuousRectangleBorder|连续的圆角矩形(直线和圆角平滑连续的过渡)|ontinuousRectangleBorder(<br/>side: BorderSide(color: Colors.red),<br/>borderRadius: BorderRadius.circular(10))|和RoundedRectangleBorder相比，圆角效果会小一些
+RoundedRectangleBorder|圆角矩形|RoundedRectangleBorder(<br/>side: BorderSide(color: Colors.red),<br/>borderRadius: BorderRadius.circular(10))||
+StadiumBorder|胶囊形状|tadiumBorder(side: BorderSide(color: Colors.red))||
+OutlineInputBorder|带外边框|utlineInputBorder(<br/>borderSide: BorderSide(color: Colors.red),<br/>borderRadius: BorderRadius.circular(10))||
+UnderlineInputBorder|UnderlineInputBorder(borderSide: BorderSide(color: Colors.red))||
+
 ### BoxDecoration
 
 
@@ -80,10 +92,11 @@ margin|EdgeInsetsGeometry|四周边缘|不占用自身空间
 &nbsp;|[FittedBox](#FittedBox)|忽略父组件传递的约束，允许子组件无限大
 &nbsp;|[Transform](#ConstrainedBox)|矩阵变换子组件
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;裁剪||
+&nbsp;|[ClipRect](#ClipRect)|默认裁剪掉子组件布局空间之外的绘制内容（溢出部分）
 &nbsp;|[ClipOval](#ClipOval)|裁剪子组件成内贴椭圆
 &nbsp;|[ClipRRect](#ClipRRect)|裁剪子组件为圆角矩形
-&nbsp;|[ClipRect](#ClipRect)|默认裁剪掉子组件布局空间之外的绘制内容（溢出部分）
 &nbsp;|[ClipPath](#ClipPath)|按照路径裁剪
+&nbsp;|[CustomClipper](#CustomClipper)|抽象类，使用CustomClipper可以绘制出任何我们想要的形状
 布局||
 &nbsp;|[Flex](#Flex)|弹性布局
 &nbsp;|[Expanded](#Expanded)|只能用于Flex的子组件，按比例填充Flex空间 
@@ -659,6 +672,102 @@ child|
 
 根据设置的`aspectRatio`设置子元素的宽高比
 
+## 裁剪
+
+### clipBehavior定义
+
+枚举值|作用
+---|---
+none|不裁剪，系统默认值，如果子组件不超出边界，此值没有任何性能消耗。
+hardEdge|裁剪但不应用抗锯齿，速度比none慢一点，但比其他方式快。
+antiAlias|裁剪而且抗锯齿，此方式看起来更平滑，比antiAliasWithSaveLayer快，比hardEdge慢，通常用于处理圆形和弧形裁剪。
+antiAliasWithSaveLayer|裁剪、抗锯齿而且有一个缓冲区，此方式很慢，用到的情况比较少。
+
+### <a id="ClipRect">ClipRect</a>
+### 实例
+
+```dart
+ClipRect(
+  child: Align(
+    alignment: Alignment.topCenter,
+    heightFactor: 0.5,
+    child: Container(
+      height: 150,
+      width: 150,
+      child: Image.asset('images/1.png', fit: BoxFit.cover),
+    ),
+  ),
+)
+
+```
+
+### <a id="ClipRRect">ClipRRect</a>
+### 实例
+
+```dart
+ClipRRect(
+  borderRadius: BorderRadius.circular(20),
+  child: Container(
+    height: 150,
+    width: 150,
+    child: Image.asset( 'images/1.png',fit: BoxFit.cover)
+  ),
+)
+```
+
+### <a id="ClipOval">ClipOval</a>
+### 实例
+
+```dart
+ClipOval(
+  child: Container(
+    height: 150,
+    width: 250,
+    child: Image.asset('images/1.png',fit: BoxFit.cover)
+  ),
+)
+```
+
+### <a id="ClipPath">ClipPath</a>
+### 实例
+
+```dart
+ClipPath.shape(
+  shape: StadiumBorder(),
+  child: Container(
+    height: 150,
+    width: 250,
+    child: Image.asset('images/1.png',fit: BoxFit.cover)
+  ),
+)
+//shape参数是ShapeBorder类型，系统已经定义了很多形状：
+//  RoundedRectangleBorder：圆角矩形
+//  ContinuousRectangleBorder：直线和圆角平滑连续的过渡，和RoundedRectangleBorder相比，圆角效果会小一些。
+//  StadiumBorder：类似于足球场的形状，两端半圆。
+//  BeveledRectangleBorder：斜角矩形。效果如图：
+```
+
+### <a id="CustomClipper">CustomClipper</a>
+
+### 实例
+
+```dart
+class TrianglePath extends CustomClipper<Path>{
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+    path.moveTo(size.width/2, 0);
+    path.lineTo(0, size.height);
+    path.lineTo(size.width, size.height);
+    return path;
+  }
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return true;
+  }
+}
+
+```
 
 ## 布局
 ### <a id="Flex">Flex</a>
@@ -901,18 +1010,21 @@ Icon( Icons.search, color:Colors.red,size:40)
 ### <a id="TextButton">TextButton</a>
 
 #### 属性
+
 属性|类型|描述
 ---|---|---
 
 ### <a id="ElevatedButton">ElevatedButton</a>
 
 #### 属性
+
 属性|类型|描述
 ---|---|---
 
 ### <a id="Switch">Switch</a>
 
 #### 属性
+
 属性|类型|描述
 ---|---|---
 value|bool|是否选中
@@ -923,6 +1035,7 @@ onChanged|void Function(bool)|选中状态改变时回调
 实际就是用ListTitle包裹了Switch
 
 #### 属性
+
 属性|类型|描述
 ---|---|---
 value|bool|是否选中
@@ -934,6 +1047,7 @@ controlAffinity|ListTileControlAffinity|Switch显示位置：<br/>leading：对�
 ### <a id="Checkbox">Checkbox</a>
 
 #### 属性
+
 属性|类型|描述
 ---|---|---
 value|bool?|状态
@@ -945,8 +1059,38 @@ onChanged|void Function(bool？)|选中状态改变时回调
 跟[SwitchListTile](#SwitchListTile)差不错样式的东西
 
 #### 属性
+
 属性|类型|描述
 ---|---|---
+
+
+### <a id="DropdownButton">DropdownButton</a>
+
+#### 属性
+
+属性|类型|描述
+---|---|---
+value|int|当前选中
+items|List\<Widget\>|下拉菜单widget
+selectedItemBuilder|List\<Widget\>|显示选中菜单的widget
+onChanged|void Function(bool)|选中状态更改回调
+
+#### 实例
+```dart
+DropdownButton(
+    value:_selectIndex,
+    selectedItemBuilder:(ctx)=>[
+        DropdownMenuItem(value:1, child: Text("u chose item1"),),
+        DropdownMenuItem(value:2, child: Text("u chose item2"),),
+        DropdownMenuItem(value:3, child: Text("u chose item3"),),
+    ],
+    items: const [
+        DropdownMenuItem(value:1, child: Text("item1"),),
+        DropdownMenuItem(value:2, child: Text("item2"),),
+        DropdownMenuItem(value:3, child: Text("item3"),),
+    ],
+    onChanged: (value)=>print("DropdownButton changed $value"))
+```
 
 ## 列表
 

@@ -84,7 +84,7 @@ final ret=await test2(66,88);
 
 //下面跑在isolate里
 final ret=await test2.isolate(66,88);
-//我们只在函数的后面加了个 "isolate" 就将原来跑在主线程的 "test" 函数跑在了 isolate
+//我们只在函数的后面加了个 "isolate" 就将原来跑在主线程的 "test2" 函数跑在了 isolate
 ```
 
 ### 典型参数函数的实现
@@ -185,13 +185,13 @@ final ret=await fun2.isolate(666,
 
 #### `Function`泛化的困惑
 
-如上[函数是什么东西?](#函数是什么东西) 所描述，当一个函数赋值给`Function`对象变量后，它的类型信息就被丢失掉(实际还是dart的类型推导不太强，rust的类型推导强得多)。上面的`FunctionExtensions`的扩展实现在`Function`对象上，意味着调用`fun2.isolate`后`fun2`函数的签名返回值类型都被丢弃了。入参参数类型可以忽略，但返回值没有了类型(dynamic)处理转换却带来了不少麻烦。
+如上[函数是什么东西?](#函数是什么东西) 所描述，当一个函数赋值给`Function`对象变量后，它的类型信息就被丢失掉(实际还是dart的类型推导不太强，rust的类型推导强得多)。上面的`FunctionExtensions`的扩展实现在`Function`对象上，意味着调用`fun2.isolate`后`fun2`函数的签名返回值类型都被丢弃了。入参参数类型可以忽略，但返回值没有了类型(dynamic)处理强制转换却总是多了一点别扭。
 
 #### 用可调用对象获取类型信息
 
-遗憾的是现阶段凭借dart语法和提供的`Function`功能，我们并不能在编译时拿到原函数的返回值类型。只能运行期强制转换或者额外添加类型信息，比如`fun2.isolate(..) as T;`、`fun2.isolate<T>(..) as T;`、`T ret=fun2.isolate<T>(..);`。额外添加类型信息总比手动类型转换好点吧？我们就来考虑该如何才能做到。
+遗憾的是现阶段凭借dart语法和提供的`Function`功能，我们并不能在编译时拿到原函数的返回值类型。只能运行期强制转换或者额外添加类型信息，比如`fun2.isolate(..) as T;`、`fun2.isolate<T>(..);`、`T ret=fun2.isolate<T>(..);`。额外添加类型信息总比手动类型转换好点吧？我们就来考虑该如何才能做到。
 
-可调用对象([Callable objects](https://dart.dev/language/callable-objects))并不是什么新鲜的事请,这跟kotlin在class中实现一个invoke函数后类的实例就可以像调用函数一样调用这个invoke函数(rust 的struct也有类似的功能也是`call`函数)，不过dart变成了call函数。
+可调用对象([Callable objects](https://dart.dev/language/callable-objects))并不是什么新鲜的事情,这跟kotlin在class中实现一个invoke函数后类的实例就可以像调用函数一样调用这个invoke函数(rust 的struct也有类似的功能也是`call`函数)，不过dart变成了call函数。
 
 为了拿到返回值类型我们定义一个对象包装下`Function`:
 
@@ -228,10 +228,10 @@ var ret1=await fun2.isolate<String>(666,
 
 #### 如何支持多位置参数
 
-上面实现的是2个位置参数的带命名参数函数跑isolate。如果是0、1、3、4。。。呢？很遗憾由于我们的扩展属性实现在`Function`上，并不能统一用`isolate`getter,所以比较符合的做法是在`isolate`后面按位置参数个数追加数字。比如：isolate0、isolate1、isolate2.。。。
+上面实现的是2个位置参数的带命名参数函数跑isolate。如果是个数的呢？很遗憾由于我们的扩展属性实现在`Function`上，并不能统一用`isolate`getter,所以比较符合的做法是在`isolate`后面按位置参数个数追加数字。比如：isolate1、isolate2、isolate3。。。
 
 ## 总结
 
 至此，讲述了如何实现不带命名参数和带命名的函数实现函数后加个`.isolate`跑在isolate中。不带命名参数的实现还是比较漂亮的，所有的类型信息都完整保留且无论多少个参数都可以用`.isolate`；而带命名参数的实现还略显不足，需要用户指定返回值类型和需要根据位置参数数量在`.isolate`后加上相应的数量。
 
-实现library [isolate_classy](https://pub.dev/packages/isolate_classy)已上传至 pub.dev.
+实现改功能的library [isolate_classy](https://pub.dev/packages/isolate_classy)已上传至 pub.dev.
