@@ -4,15 +4,14 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-## markdown记录一些学习笔记
-- 技术学习技术学习笔记
+## ```nasm- 技术学习技术学习笔记
 - 一些疑难杂症
 - 其他
 
 
 ## 技能树
 
-技能|掌握程度
+技能|年/掌握程度
 ---|---
 Android、Java|12年
 kotlin|5年
@@ -22,3 +21,5 @@ Python|熟练
 C#| 4.5年
 MASM|熟练
 Rust|⼀般
+
+
