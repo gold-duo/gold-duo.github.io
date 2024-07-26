@@ -105,6 +105,7 @@ add rsp,8
 
 ```nasm
   push rbp
+  mov rbp, rsp
   sub rsp,x*8     ;局部变量空间。这两句可以用enter指令替代，但enter比较慢少有编译器用
   ;...
   mov rsp,rbp     ;恢复原来的栈.这句和下一句intel提供了leave指令
