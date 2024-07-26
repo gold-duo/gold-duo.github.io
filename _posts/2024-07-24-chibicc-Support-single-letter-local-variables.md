@@ -209,7 +209,7 @@ static void gen(Node *node) {
 }
 ```
 
-### 5.其他
+#### 5.其他
 
 这次他生成的汇编是一个典型的函数模版（我在[Add the notion of the expression statement](https://gold-duo.github.io/posts/chibicc-Add-the-notion-of-the-expression-statement/)中提到）。由于之前`ND_RETURN`节点直接用`ret`指令跳出，这次由于分配了栈空间给26个字母变量所以不能直接这么退出了，他改成了跳转label的方式
 
